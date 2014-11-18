@@ -20,8 +20,8 @@ The following is a chart of the pulse width modulations that will control the wh
 |Back|0|PWM|0|PWM|
 |Right|PWM|0|0|PWM|
 |Left|0|PWM|PWM|0|
-|Right 45|PWM/2|0|0|PWM/2|
-|Left 45|0|PWM/2|PWM/2|0|
+|Right < 45|PWM/2|0|0|PWM/2|
+|Left < 45|0|PWM/2|PWM/2|0|
 
 __Software Setup__  
-T
+Each remote button press will be just like in my ECE382_Lab5 where there will be an interrupt that then goes through many if loops according to the remote button that was pressed. But instead of turning on LEDs or making an etch-a-sketch game, the if loops will control the motors. The MSP430 pins that I will use for the motors are P1.2, P1.3, P1.4, P1.5; which respectively correspond to the Left Motor +, Left Motor -, Right Motor +, and Right Motor -. If the remote button that I choose for a certain function is pressed, there will be a method underneath that will make the motor happen. The following are the methods that will be used: moveForward(), moveBackward(), moveRight(), moveLeft(), moveLittleRight(), and moveLittleLeft().
