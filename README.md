@@ -15,7 +15,7 @@ FIGURE 1
 The following is a chart of the pulse width modulations that will control the wheel:
 
 |Movement|Left Motor +|Left Motor -|Right Motor +|Right Motor -|
-|:--|--|--|--|--|
+|:--|:--:|:--:|:--:|:--:|
 |Forward|PWM|0|PWM|0|
 |Back|0|PWM|0|PWM|
 |Right|PWM|0|0|PWM|
