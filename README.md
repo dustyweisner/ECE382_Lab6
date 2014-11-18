@@ -11,6 +11,7 @@ This Lab requires me to demonstrate movement forward, backward, a small (< 45 de
 
 FIGURE 1
 
+![](https://github.com/dustyweisner/ECE382_Lab6/blob/master/Images/HardwareSchematic.gif?raw=true)
 
 The following is a chart of the pulse width modulations that will control the wheel:
 
@@ -24,4 +25,4 @@ The following is a chart of the pulse width modulations that will control the wh
 |Left < 45|0|PWM/2|PWM/2|0|
 
 __Software Setup__  
-Each remote button press will be just like in my ECE382_Lab5 where there will be an interrupt that then goes through many if loops according to the remote button that was pressed. But instead of turning on LEDs or making an etch-a-sketch game, the if loops will control the motors. The MSP430 pins that I will use for the motors are P1.2, P1.3, P1.4, P1.5; which respectively correspond to the Left Motor +, Left Motor -, Right Motor +, and Right Motor -. If the remote button that I choose for a certain function is pressed, there will be a method underneath that will make the motor happen. The following are the methods that will be used: moveForward(), moveBackward(), moveRight(), moveLeft(), moveLittleRight(), and moveLittleLeft().
+Each remote button press will be just like in my ECE382_Lab5 where there will be an interrupt that then goes through many if loops according to the remote button that was pressed. But instead of turning on LEDs or making an etch-a-sketch game, the if loops will control the motors. The MSP430 pins that I will use for the motors are P1.2, P1.3, P1.4, P1.5; which respectively correspond to the Left Motor +, Left Motor -, Right Motor +, and Right Motor -. If the remote button that I choose for a certain function is pressed, there will be a method underneath that will make the motor happen. The following are the methods that will be used: moveForward(), moveBackward(), moveRight(), moveLeft(), moveLittleRight(), and moveLittleLeft(). TA0CCRO will control the left motor, and TA1CCRO will control the right motor. 
