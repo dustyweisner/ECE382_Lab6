@@ -13,7 +13,7 @@ __FIGURE 1__
 
 ![](https://github.com/dustyweisner/ECE382_Lab6/blob/master/Images/HardwareSchematic.gif?raw=true)
 
-The following is a chart of the pulse width modulations that will control the wheel:
+The following is a chart of the pulse width modulations that will control the wheel (This idea was inspired by C2C Clayton Jaksha, and I thought it was a vital and simple snippet of information):
 
 |Movement|Left Motor +|Left Motor -|Right Motor +|Right Motor -|
 |:--|:--:|:--:|:--:|:--:|
