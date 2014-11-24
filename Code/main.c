@@ -1,5 +1,5 @@
 #include <msp430.h>
-//#include "main.h"
+#include "main.h"
 
 void main(void) {
     WDTCTL = WDTPW|WDTHOLD;                 // stop the watchdog timer
@@ -15,10 +15,10 @@ void main(void) {
 	TA1CTL = ID_3 | TASSEL_2 | MC_1;		// Use 1:8 presclar off MCLK
     TA1CCR0 = 100;							// set signal period
 
-    TA1CCR1 = 50;
+    TA1CCR1 = 20;
     TA1CCTL1 = OUTMOD_7;					// set TACCTL1 to Reset / Set mode
 
-    TA1CCR2 = 50;
+    TA1CCR2 = 80;
     TA1CCTL2 = OUTMOD_3;
 
     // P2.0 - Timer1_A, capture: CCI0A input, compare: Out0 output
@@ -29,179 +29,151 @@ void main(void) {
 
     while (1) {
 
-    	// Forward
-    	P2DIR |= BIT0;
-		P2OUT &= ~BIT0;
-		P2DIR |= BIT3;
-		P2OUT &= ~BIT3;
-		TA1CCR1 = 50;
-		TA1CCR2 = 50;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
+    	moveForward();
 		_delay_cycles(1000000);
-
-		//Stop
-		P2DIR |= BIT0;
-		P2OUT |= BIT0;
-		P2DIR |= BIT3;
-		P2OUT |= BIT3;
-		TA1CCR1 = 0;
-		TA1CCR2 = 0;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
+		stopMovingForward();
+		_delay_cycles(1000000*2);
+		moveBackward();
+		_delay_cycles(1000000);
+		stopMovingBackward();
+		_delay_cycles(1000000*2);
+		moveSmallLeft();
+		_delay_cycles(1000000*2);
+		moveSmallRight();
+		_delay_cycles(1000000*2);
+		moveLeft();
+		_delay_cycles(1000000*2);
+		moveRight();
 		_delay_cycles(1000000*2);
 
-		// Backward
-		P2DIR |= BIT1;
-		P2OUT &= ~BIT1;
-		P2DIR |= BIT5;
-		P2OUT &= ~BIT5;
-		TA1CCR1 = 50;
-		TA1CCR2 = 50;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000);
+    } // end loop
+} // end main
 
-		// Stop
+void stopMovingBackward(void) {
 		P2DIR |= BIT1;
 		P2OUT |= BIT1;
 		P2DIR |= BIT5;
 		P2OUT |= BIT5;
 		TA1CCR1 = 0;
 		TA1CCR2 = 0;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000*2);
+		TA1CCTL1 = OUTMOD_5;
+		TA1CCTL2 = OUTMOD_5;
+}
 
-		// small left
-		P2DIR |= BIT0;
-		P2OUT |= BIT0;
-		P2DIR |= BIT3;
-		P2OUT &= ~BIT3;
-		TA1CCR1 = 50;
-		TA1CCR2 = 50;
-		TA1CCTL1 = OUTMOD_3;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(100000);
-
-		// Stop
+void stopMovingForward(void) {
 		P2DIR |= BIT0;
 		P2OUT |= BIT0;
 		P2DIR |= BIT3;
 		P2OUT |= BIT3;
 		TA1CCR1 = 0;
 		TA1CCR2 = 0;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000*2);
+		TA1CCTL1 = OUTMOD_5;
+		TA1CCTL2 = OUTMOD_5;
+}
 
-		// small right
-		P2DIR |= BIT0;
+void moveForward(void) {
+    	P2DIR |= BIT0;
 		P2OUT &= ~BIT0;
 		P2DIR |= BIT3;
-		P2OUT |= BIT3;
-		TA1CCR1 = 50;
-		TA1CCR2 = 50;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_3;
-		_delay_cycles(100000);
-
-		// Stop
-		P2DIR |= BIT0;
-		P2OUT |= BIT0;
-		P2DIR |= BIT3;
-		P2OUT |= BIT3;
-		TA1CCR1 = 0;
-		TA1CCR2 = 0;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000*2);
-
-
-		// big left
-		P2DIR |= BIT0;
-		P2OUT |= BIT0;
-		P2DIR |= BIT3;
 		P2OUT &= ~BIT3;
-		TA1CCR1 = 50;
-		TA1CCR2 = 50;
-		TA1CCTL1 = OUTMOD_3;
+		TA1CCR1 = 20;
+		TA1CCR2 = 80;
+		TA1CCTL1 = OUTMOD_5;
 		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000);
 
-		// Stop
-		P2DIR |= BIT0;
-		P2OUT |= BIT0;
-		P2DIR |= BIT3;
-		P2OUT |= BIT3;
-		TA1CCR1 = 0;
-		TA1CCR2 = 0;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000*2);
+}
 
-		// big right
-		P2DIR |= BIT0;
-		P2OUT &= ~BIT0;
-		P2DIR |= BIT3;
-		P2OUT |= BIT3;
-		TA1CCR1 = 50;
-		TA1CCR2 = 50;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_3;
-		_delay_cycles(1000000);
+void moveBackward() {
+	P2DIR |= BIT1;
+	P2OUT &= ~BIT1;
+	P2DIR |= BIT5;
+	P2OUT &= ~BIT5;
+	TA1CCR1 = 50;
+	TA1CCR2 = 50;
+	TA1CCTL1 = OUTMOD_7;
+	TA1CCTL2 = OUTMOD_5;
+}
 
-		// Stop
-		P2DIR |= BIT0;
-		P2OUT |= BIT0;
-		P2DIR |= BIT3;
-		P2OUT |= BIT3;
-		TA1CCR1 = 0;
-		TA1CCR2 = 0;
-		TA1CCTL1 = OUTMOD_7;
-		TA1CCTL2 = OUTMOD_7;
-		_delay_cycles(1000000*2);
+void moveSmallRight() {
+	P2DIR |= BIT0;
+	P2OUT &= ~BIT0;
+	P2DIR |= BIT3;
+	P2OUT |= BIT3;
+	TA1CCR1 = 50;
+	TA1CCR2 = 50;
+	TA1CCTL1 = OUTMOD_7;
+	TA1CCTL2 = OUTMOD_5;
+	_delay_cycles(250000);
+	P2DIR |= BIT0;
+	P2OUT |= BIT0;
+	P2DIR |= BIT3;
+	P2OUT |= BIT3;
+	TA1CCR1 = 0;
+	TA1CCR2 = 0;
+	TA1CCTL1 = OUTMOD_5;
+	TA1CCTL2 = OUTMOD_5;
 
+}
 
+void moveSmallLeft() {
+	P2DIR |= BIT0;
+	P2OUT |= BIT0;
+	P2DIR |= BIT3;
+	P2OUT &= ~BIT3;
+	TA1CCR1 = 50;
+	TA1CCR2 = 50;
+	TA1CCTL1 = OUTMOD_5;
+	TA1CCTL2 = OUTMOD_7;
+	_delay_cycles(250000);
+	P2DIR |= BIT0;
+	P2OUT |= BIT0;
+	P2DIR |= BIT3;
+	P2OUT |= BIT3;
+	TA1CCR1 = 0;
+	TA1CCR2 = 0;
+	TA1CCTL1 = OUTMOD_5;
+	TA1CCTL2 = OUTMOD_5;
 
-    } // end loop
-} // end main
-//void stopMoving() {
-//	P2DIR |= BIT0;
-//	P2OUT |= BIT0;
-//	P2DIR |= BIT1;
-//	P2OUT |= BIT1;
-//	P2DIR |= BIT3;
-//	P2OUT |= BIT3;
-//	P2DIR |= BIT5;
-//	P2OUT |= BIT5;
-//}
-//
-//void moveForward() {
-//	P2DIR |= BIT1;
-//	P2OUT &= ~BIT1;
-//	P2DIR |= BIT5;
-//	P2OUT &= ~BIT5;
-//
-//}
-//
-//void moveBackward() {
-//
-//}
-//
-//void moveSmallRight() {
-//
-//}
-//
-//void moveSmallLeft() {
-//
-//}
-//
-//void moveRight() {
-//
-//}
-//
-//void moveLeft() {
-//
-//}
-//
+}
+
+void moveRight() {
+	P2DIR |= BIT0;
+	P2OUT &= ~BIT0;
+	P2DIR |= BIT3;
+	P2OUT |= BIT3;
+	TA1CCR1 = 50;
+	TA1CCR2 = 50;
+	TA1CCTL1 = OUTMOD_7;
+	TA1CCTL2 = OUTMOD_5;
+	_delay_cycles(500000);
+	P2DIR |= BIT0;
+	P2OUT |= BIT0;
+	P2DIR |= BIT3;
+	P2OUT |= BIT3;
+	TA1CCR1 = 0;
+	TA1CCR2 = 0;
+	TA1CCTL1 = OUTMOD_5;
+	TA1CCTL2 = OUTMOD_5;
+
+}
+
+void moveLeft() {
+	P2DIR |= BIT0;
+	P2OUT |= BIT0;
+	P2DIR |= BIT3;
+	P2OUT &= ~BIT3;
+	TA1CCR1 = 50;
+	TA1CCR2 = 50;
+	TA1CCTL1 = OUTMOD_5;
+	TA1CCTL2 = OUTMOD_7;
+	_delay_cycles(500000);
+	P2DIR |= BIT0;
+	P2OUT |= BIT0;
+	P2DIR |= BIT3;
+	P2OUT |= BIT3;
+	TA1CCR1 = 0;
+	TA1CCR2 = 0;
+	TA1CCTL1 = OUTMOD_5;
+	TA1CCTL2 = OUTMOD_5;
+}
+
