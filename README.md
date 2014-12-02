@@ -130,7 +130,7 @@ Then I moved on to stop the wheels. All I had to do was set the motor pins. To m
 
 Notice that I had to turn the robot for a delayed amount of time, and then I would stop both my wheels...the execution of a turn could not continue like a forward or backward movement. To make a smaller or larger turn right or left, I only had to delay for longer (bigger turn) or shorter (shorter turn).
 
-__A Functionality__ 
+__A Functionality__   
 The A functionality of the lab required me to move the robot using button pushes on the tv remote from lab 5. All I did was import the initializations and variables, `afunc5.h`, and interrupts. The header file contained all of the tv remote button press information from lab 5. The initializations are as follows:
 
     IFG1=0; /* clear interrupt flag1 */
@@ -168,5 +168,5 @@ However, the main took a little bit of work, but not much. From the lab 5 main, 
 Above was the only code that I had to mess with for the A functionality. I programmed the up button to move the robot forward and the same for left, right, and down (back) buttons. The select button was a movement stopper. For debugging purposes, I had to make the robot only susceptible to movement change only if the robot was stopped. Before, my robot was not recieving well. I also added another delay loop at the end of my disabled interrupt cycle for longer time between button presses as to not screw up the irPacket. This concludes Lab 6 A functionality.
 
 
-__Documentation__
+__Documentation__  
 I recieved help with setting and clearing motor pins from C1C Cassie McPeek. I used much of the code from previous labs for this lab. I also used Dr. Coulston's code for initialization of pins and Timer controls.
