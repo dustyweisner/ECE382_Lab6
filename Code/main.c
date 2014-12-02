@@ -1,3 +1,12 @@
+/*
+*Creator: Dustin Weisner
+*1 Dec 2014 
+*USAFA DFEC
+*Documentation: I recieved help with setting and clearing motor pins from C1C Cassie McPeek.
+*	I used much of the code from previous labs for this lab. 
+*	I also used Dr. Coulston's code for initialization of pins and Timer controls.
+*/
+
 #include <msp430.h>
 #include "main.h"
 
